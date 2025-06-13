@@ -14,7 +14,7 @@ col1, col2, col3 = st.columns([1,3,1])
 with col2:
     st.image("https://img.freepik.com/free-vector/hand-drawn-rising-house-prices-illustration_23-2150801646.jpg?semt=ais_items_boosted&w=740")
 
-df = pd.read_csv(r"D:\Epsilon\Pandas & numpy\Mid Project\Epsilon\House_Pricing_Cleaned_1.csv", index_col=0)
+df = pd.read_csv("House_Pricing_Cleaned_1.csv", index_col=0)
 
 
 st.dataframe(df.head(10))
