@@ -14,7 +14,7 @@ col1, col2, col3 = st.columns([1,3,1])
 with col2:
     st.image("https://img.freepik.com/free-vector/hand-drawn-rising-house-prices-illustration_23-2150801646.jpg?semt=ais_items_boosted&w=740")
 
-df = pd.read_csv("D:\Epsilon\Pandas & numpy\Mid Project\House_Pricing_Cleaned_1", index_col=0)
+df = pd.read_csv("House_Pricing_Cleaned_1", index_col=0)
 
 
 st.dataframe(df.head(10))
@@ -69,7 +69,6 @@ elif page == 'Bivariate Analysis':
     sns.lineplot(x = "Floor No", y = "Amount(in rupees)", data = df)
     st.pyplot(fig2)
 
-    st.plotly_chart(px.box(data_frame= df, x= 'Furnishing', y= 'Amount(in rupees)', color_discrete_sequence=['red']))
     
 
 
