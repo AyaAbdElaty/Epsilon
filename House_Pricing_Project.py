@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 st.set_page_config(layout="wide", page_title="House Pricing")
 html_title = """<h1 style="color:white;text-align:center;"> House Pricing </h1>"""
@@ -13,7 +14,7 @@ col1, col2, col3 = st.columns([1,3,1])
 with col2:
     st.image("https://img.freepik.com/free-vector/hand-drawn-rising-house-prices-illustration_23-2150801646.jpg?semt=ais_items_boosted&w=740")
 
-df = pd.read_csv("House_Pricing_Cleaned", index_col=0)
+df = pd.read_csv("D:\Epsilon\Pandas & numpy\Mid Project\House_Pricing_Cleaned_1", index_col=0)
 
 
 st.dataframe(df.head(10))
@@ -33,30 +34,42 @@ elif page == 'Bivariate Analysis':
     st.header("The average price for each location")
 
     df1 = df.groupby("location")["Amount(in rupees)"].mean().sort_values(ascending= False)
-    st.plotly_chart(px.bar(data_frame=df1, color_discrete_sequence=["red"] ))
+    st.plotly_chart(px.bar(data_frame=df1, color_discrete_sequence=["blue"] ))
 
     st.header("The effect of Furnishing on Price")
     df2 = df.groupby("Furnishing")["Amount(in rupees)"].median().sort_values()
-    st.plotly_chart(px.bar(df2, color_discrete_sequence=["red"]))
+    st.plotly_chart(px.bar(df2, color_discrete_sequence=["blue"]))
 
     st.header("The relation between ownership and Price")
     df3 = df.groupby("Ownership")["Amount(in rupees)"].count().sort_values()
-    st.plotly_chart(px.bar(df3, color_discrete_sequence= ["red"]))
+    st.plotly_chart(px.bar(df3, color_discrete_sequence= ["blue"]))
 
     st.header("The relation between Transaction and Price")
     df4 = df.groupby("Transaction")["Amount(in rupees)"].median().sort_values()
-    st.plotly_chart(px.bar(df4,color_discrete_sequence=["red"]))
+    st.plotly_chart(px.bar(df4,color_discrete_sequence=["blue"]))
 
     st.header("The relation between facing and price")
     df5 = df.groupby("facing")["Amount(in rupees)"].median().sort_values()
-    st.plotly_chart(px.bar(df5, color_discrete_sequence=["red"]))
+    st.plotly_chart(px.bar(df5, color_discrete_sequence=["blue"]))
 
     st.header("")
     
-    # st.header("The effect of area on Price")
-    # st.plotly_chart(sns.lineplot(x = "Carpet Area", y = "Amount(in rupees)", data = df))
-    # st.header("The effect of no. of Bathrooms on price")
-    # st.plotly_chart(sns.lineplot(x = "Balcony", y = "Amount(in rupees)", data = df))
+    st.header("The effect of area on Price")
+    fig, ax = plt.subplots()
+    sns.lineplot(x = "Carpet Area", y = "Amount(in rupees)", data = df, ax = ax)
+    st.pyplot(fig)
+
+    st.header("The effect of no. of balcony on price")
+    fig1, ax1 = plt.subplots()
+    sns.lineplot(x = "Balcony", y = "Amount(in rupees)", data = df, ax = ax1)
+    st.pyplot(fig1)
+
+    st.header("Does the floor number affect price?")
+    fig2, ax2 = plt.subplots()
+    sns.lineplot(x = "Floor No", y = "Amount(in rupees)", data = df)
+    st.pyplot(fig2)
+
+    st.plotly_chart(px.box(data_frame= df, x= 'Furnishing', y= 'Amount(in rupees)', color_discrete_sequence=['red']))
     
 
 
