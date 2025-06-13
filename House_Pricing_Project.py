@@ -41,6 +41,11 @@ elif page == 'Bivariate Analysis':
     st.plotly_chart(px.bar(df2, color_discrete_sequence=["blue"]))
 
     st.header("The relation between ownership and Price")
+    
+    st.markdown("###### Freehold: means complete ownership of a property and the land it's on, with no time limit")
+    st.markdown("###### Leasehold  means temporary ownership for a fixed period under a lease")
+    st.markdown("###### Cooperative society Housing co-ops where members collectively own and manage residential properties.")
+    st.markdown("###### A Power of Attorney (POA) is a legal document that authorizes someone to act on your behalf in financial, property, or health matters.")
     df3 = df.groupby("Ownership")["Amount(in rupees)"].count().sort_values()
     st.plotly_chart(px.bar(df3, color_discrete_sequence= ["blue"]))
 
