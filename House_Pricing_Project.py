@@ -19,7 +19,7 @@ df = pd.read_csv("House_Pricing_Cleaned_1.csv", index_col=0)
 
 st.dataframe(df.head(10))
 
-page = st.sidebar.radio('Pages', ['Univariate Analysis','Bivariate Analysis', 'MultiVariate Analysis'])
+page = st.sidebar.radio('Pages', ['Univariate Analysis','Bivariate Analysis'])
    
 
 if page == 'Univariate Analysis':
@@ -77,10 +77,4 @@ elif page == 'Bivariate Analysis':
     
 
 
-elif page == 'MultiVariate Analysis':
 
-    Price_of_area_of_eachLocation = (df.groupby(["Carpet Area", 'location'])['Amount(in rupees)'].mean().round(4) * 100).reset_index()
-    st.plotly_chart(px.bar(data_frame= Price_of_area_of_eachLocation, x= 'Carpet Area', y= 'Amount(in rupees)', text_auto= True, color= 'location',
-        title= '',
-        labels= {'actual_productivity' : 'Average Productivity'}, barmode= 'group',
-        color_discrete_sequence= ['red']))
